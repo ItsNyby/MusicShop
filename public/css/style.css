@@ -1,0 +1,94 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f7f7f7;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  width: 250px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.product-card h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product-card a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.product-card img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.product-detail {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.product-detail img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.product-detail h1 {
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.product-detail p {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form label {
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+form select {
+  padding: 5px 10px;
+  margin-left: 5px;
+}

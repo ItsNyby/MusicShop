@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Music Shop</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>Daftar Produk Alat Musik</h1>
+
+  <form id="filter-form">
+    <label>
+      Kategori:
+      <select id="category-select">
+        <option value="">Semua</option>
+        <option value="Gitar">Gitar</option>
+        <option value="Drum">Drum</option>
+        <option value="Keyboard">Keyboard</option>
+        <option value="Bass">Bass</option>
+        <option value="Piano">Piano</option>
+      </select>
+    </label>
+
+    <label>
+      Tipe Jual:
+      <select id="selling-type-select">
+        <option value="">Semua</option>
+        <option value="new product">Baru</option>
+        <option value="best seller">Best Seller</option>
+        <option value="promo">Promo</option>
+      </select>
+    </label>
+
+    <button type="submit">Filter</button>
+  </form>
+
+  <div id="product-grid" class="product-grid"></div>
+
+  <script>
+    const grid = document.getElementById('product-grid');
+    const form = document.getElementById('filter-form');
+    const categorySelect = document.getElementById('category-select');
+    const sellingTypeSelect = document.getElementById('selling-type-select');
+
+    function loadProducts(category = '', selling_type = '') {
+      let url = '/api/products';
+      const params = new URLSearchParams();
+
+      if (category) params.append('category', category);
+      if (selling_type) params.append('selling_type', selling_type);
+
+      if (params.toString()) {
+        url += '?' + params.toString();
+      }
+
+      fetch(url)
+        .then(res => res.json())
+        .then(products => {
+          grid.innerHTML = '';
+          if (products.length === 0) {
+            grid.innerHTML = '<p>Tidak ada produk sesuai filter.</p>';
+            return;
+          }
+          products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+              <img src="/images/${product.image}" alt="${product.name}" />
+              <h2>${product.name}</h2>
+              <p>Harga: Rp ${product.price.toLocaleString()}</p>
+              <p>Kategori: ${product.category}</p>
+              <p>Tipe Jual: ${product.selling_type}</p>
+              <a href="/product.html?id=${product.id}">Lihat Detail</a>
+            `;
+            grid.appendChild(card);
+          });
+        })
+        .catch(() => {
+          grid.innerHTML = '<p>Gagal memuat produk.</p>';
+        });
+    }
+
+    loadProducts();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const category = categorySelect.value;
+      const selling_type = sellingTypeSelect.value;
+      loadProducts(category, selling_type);
+    });
+  </script>
+</body>
+</html>
